@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SerieController;
 use App\Http\Controllers\SeriesController;
 
 /*
@@ -19,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/series', [SeriesController::class, 'index']);
-Route::get('/series/adicionar', [SeriesController::class, 'create']);
+Route::get('/series', [SerieController::class, 'index']);
+Route::get('/series/adicionar', [SerieController::class, 'create']);
+Route::put('/series/salvar', [SerieController::class, 'store']);
