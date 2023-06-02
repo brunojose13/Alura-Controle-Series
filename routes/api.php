@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/series', [SerieController::class, 'index']);
 Route::get('/series/adicionar', [SerieController::class, 'create']);
-Route::put('/series/salvar', [SerieController::class, 'store']);
+Route::post('/series/salvar', [SerieController::class, 'store']);
