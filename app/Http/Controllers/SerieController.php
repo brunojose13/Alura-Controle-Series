@@ -3,21 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
+use App\Models\Serie;
 
 class SerieController extends Controller
 {
+    public Serie $serie;
 
-    public $series;
-    public function index()
+    /* USING A DIRECT CONNECTION:
+     *  public function __construct()
+     *  {
+     *      $this->serie = DB::select('SELECT name FROM series;');
+     *  }
+     */
+
+    public function __construct()
     {
-        $this->series = [
-            'Punisher', 
-            'Lost', 
-            'Grey\'s Anatomy'
-        ];
+        $this->serie = new Serie();
+    }
 
-        return view('series.index')->with('series', $this->series);
+    public function index()
+    {  
+        $allSeries = $this->serie->getSeries();
+        return view('series.index')->with('series', $allSeries);
     }
 
     public function create()
@@ -27,14 +35,14 @@ class SerieController extends Controller
 
     public function store(Request $request)
     {
-        $nomeSerie = $request->input('nome');
+        $seriesName = $request->input('nome');
 
-        if (DB::insert('INSERT INTO series (name) VALUES (?)', [$nomeSerie])) {
-            dd($this->series);
-            return view('series.index')->with('series', $this->series);
+        /* USING A DIRECT CONNECTION:
+         *  DB::insert('INSERT INTO series (name) VALUES (?)', [$nomeSerie]); 
+         */
 
-        } else {
-            return;
-        }
+        $this->serie->saveSeries($seriesName);
+
+        return redirect('api/series');
     }
 }
