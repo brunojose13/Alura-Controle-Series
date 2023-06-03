@@ -1,6 +1,6 @@
 <x-layout title='Nova série'>
     
-    <- action with "/" overwrite all the url, including the "api" ->
+    <!-- action with "/" overwrite all the url, including the "api" -->
     <form method="post" action="salvar">
         @csrf
         <label for="nome">Nome</label>

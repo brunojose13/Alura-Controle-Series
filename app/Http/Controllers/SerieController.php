@@ -24,7 +24,7 @@ class SerieController extends Controller
 
     public function index()
     {  
-        $allSeries = $this->serie->getSeries();
+        $allSeries = $this->serie->getAllSeries();
         return view('series.index')->with('series', $allSeries);
     }
 
